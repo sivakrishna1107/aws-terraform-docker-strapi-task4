@@ -1,43 +1,67 @@
-# Terraform AWS Strapi Infrastructure (Baseline)
+Strapi Deployment with docker and alb on AWS Using Terraform
 
-This repository contains the **baseline setup** for deploying a Strapi application on AWS using **Terraform**.
+This project demonstrates how to deploy a Strapi application on AWS using Terraform and Docker. The setup uses an EC2 instance running inside a private network and exposes Strapi to the internet through an Application Load Balancer.
 
-The `main` branch represents the **initial project structure and environment setup**.  
-The **complete infrastructure implementation** (VPC, private EC2, NAT Gateway, Load Balancer, Dockerized Strapi, etc.) is available in the **`task` branch**.
+The goal of this setup is to provide a simple and automated way to run Strapi in AWS without manually configuring servers or networking.
 
----
+What This Project Does
 
-##Purpose of This Repository
+It creates AWS infrastructure using Terraform
+It launches an EC2 instance in the ap south 1 region
+It installs Docker automatically using user data
+It runs Strapi as a Docker container on port 1337
+It exposes Strapi using an Application Load Balancer
+It outputs the public URL of the application
 
-The goal of this project is to demonstrate:
+AWS Region and Instance Details
 
-- Infrastructure as Code (IaC) using Terraform
-- Secure AWS networking design
-- Environment-based configuration using `tfvars`
-- Automated application deployment using `user_data`
-- Professional Git workflow using feature branches
+Region is ap south 1
+Instance type is t2 micro
+AMI used is ami 0ff5003538b60d5ec
 
----
+Prerequisites
 
-##Branch Strategy
+Terraform must be installed on your local machine
+AWS CLI must be installed and configured
+You must have an AWS account with required permissions
 
-- **`main`**
-  - Clean baseline
-  - Project structure
-  - Terraform configuration skeleton
-  - No environment-specific or task-specific logic
+How to Deploy
 
-- **`task`**
-  - Full implementation of the assignment:
-    - VPC with public and private subnets
-    - NAT Gateway for outbound internet access
-    - Private EC2 instance
-    - Security Groups
-    - Application Load Balancer
-    - Dockerized Strapi deployment
-    - Environment separation using `tfvars`
+Clone the repository to your local machine
 
- **Please switch to the `task` branch to review the complete solution.**
+Run terraform init to initialize the project
 
+Run terraform plan to review the changes
 
+Run terraform apply and approve when prompted
 
+Terraform will create all required resources automatically
+
+Accessing Strapi
+
+After deployment Terraform outputs the Application Load Balancer DNS name
+
+Example
+
+strapi ap alb 788546221 ap south 1 elb amazonaws com
+
+Open this address in your browser
+
+http colon slash slash alb dns name
+
+Strapi will be available on port 1337
+
+Docker Details
+
+Docker is installed automatically on the EC2 instance
+Strapi runs inside a Docker container
+No manual SSH steps are required
+
+Notes
+
+This setup is intended for learning and development purposes
+For production use consider adding HTTPS authentication and persistent storage
+
+Conclusion
+
+This project provides a simple quick start for running Strapi on AWS using Terraform and Docker. All infrastructure and application setup is automated so you can focus on development instead of server management.
